@@ -4,5 +4,8 @@
 /gradle
 /lib
 *.iml
+*.ipr
+*.iws
 target
 classes
+out
