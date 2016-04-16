@@ -1,4 +1,5 @@
-Deploy to Docker on AWS
+Deploy to Docker
+- docker run -p 8080:8080 -t <imageid>
 - Have both uber jar and DB running
 
 Connect and use MySQL DB

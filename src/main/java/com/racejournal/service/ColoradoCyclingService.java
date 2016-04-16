@@ -5,6 +5,7 @@ import com.racejournal.domain.RaceType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -28,15 +29,21 @@ public class ColoradoCyclingService {
     @Autowired
     private ResourceLoader resourceLoader;
 
+    @Value("${racesfile}")
+    private String racesFile;
+    @Value("${racesurl}")
+    private String racesUrl;
+
+
     /*
     TODO refactor to remove code redundancy
      */
 
     public List<Race> loadLocal() {
-        log.info("Load local races");
+        log.info(String.format("Load local races from file %s", racesFile));
         List<Race> races = new ArrayList<Race>();
 
-        Resource resource = resourceLoader.getResource(String.format("classpath:%s", "ColoradoCycling2016.ics.txt")); // TODO externalize
+        Resource resource = resourceLoader.getResource(String.format("classpath:%s", racesFile));
         BufferedReader bufferedReader = null;
         try {
             bufferedReader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
@@ -54,12 +61,12 @@ public class ColoradoCyclingService {
     }
 
     public List<Race> loadRemote() {
-        log.info("Load remote races");
+        log.info(String.format("Load remote races from url %s", racesUrl));
         List<Race> races = new ArrayList<Race>();
 
         BufferedReader bufferedReader = null;
         try {
-            URL url = new URL("http://www.coloradocycling.org/calendar/download"); // TODO externalize
+            URL url = new URL(racesUrl);
             bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
             races = readAndParse(bufferedReader);
         } catch(IOException e) {
@@ -79,7 +86,7 @@ public class ColoradoCyclingService {
         Race race = null;
         String line = null;
         while ((line = reader.readLine()) != null) {  // UID:56b11fa5c2ed2
-            log.info(String.format("Reading line %s", line));
+            log.debug(String.format("Reading line %s", line));
             if(line.startsWith("BEGIN")) {
                 race = new Race();
             }
