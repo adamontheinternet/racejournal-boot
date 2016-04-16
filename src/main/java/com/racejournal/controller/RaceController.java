@@ -1,5 +1,6 @@
 package com.racejournal.controller;
 
+import com.racejournal.domain.RaceType;
 import com.racejournal.service.RaceService;
 import com.racejournal.domain.Race;
 import org.apache.commons.logging.Log;
@@ -22,8 +23,12 @@ public class RaceController {
     RaceService raceService;
 
     @RequestMapping("/races")
-    public List<Race> races(@RequestParam(value="raceType", required=false) String raceType) {
-        log.info(String.format("Get races for raceType %s", raceType));
-        return raceService.fetchRaces();
+    public List<Race> races(@RequestParam(value="raceType", required=false) String raceTypeString) {
+        log.info(String.format("Get races for raceType %s", raceTypeString));
+        RaceType raceType = null;
+        if(raceTypeString != null) {
+            raceType = RaceType.valueOf(raceTypeString);
+        }
+        return raceService.fetchRaces(raceType);
     }
 }

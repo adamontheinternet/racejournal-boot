@@ -1,6 +1,8 @@
 package com.racejournal.service;
 
+import com.racejournal.dataaccess.RaceRepository;
 import com.racejournal.domain.Race;
+import com.racejournal.domain.RaceType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,19 @@ public class RaceService {
     private Log log = LogFactory.getLog(RaceService.class);
 
     @Autowired
-    ColoradoCyclingService coloradoCyclingService;
+    private ColoradoCyclingService coloradoCyclingService;
 
-    public List<Race> fetchRaces() {
-        log.info("Fetch races");
-        return coloradoCyclingService.loadLocal();
+    @Autowired
+    private RaceRepository raceRepository;
+
+    public List<Race> fetchRaces(RaceType raceType) {
+        log.info(String.format("Fetch races by type %s", raceType));
+        List<Race> races = raceRepository.findAll();
+        if(races.isEmpty()) {
+            log.info("No races cached - Bootstrap and load race data");
+            races = coloradoCyclingService.loadLocal();
+            raceRepository.save(races);
+        }
+        return raceType != null ? raceRepository.findRaceByRaceType(raceType) : raceRepository.findAll();
     }
 }

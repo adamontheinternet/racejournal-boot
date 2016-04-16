@@ -91,7 +91,7 @@ public class ColoradoCyclingService {
                 race = new Race();
             }
             if(line.startsWith("UID")) {
-                race.setId(line.split(":")[1]);
+                race.setUid(line.split(":")[1]);
             }
             if(line.startsWith("DTSTART")) { // DTSTART:20160402T000000Z
                 String date = line.split(":")[1];

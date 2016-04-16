@@ -1,8 +1,9 @@
 Deploy to Docker
-- docker run -p 8080:8080 -t <imageid>
-- Have both uber jar and DB running
+- http://192.168.99.100:8080/races
 
 Connect and use MySQL DB
+- Also on docker
+- mysql -h 127.0.0.1 -u root -p
 
 Basic authentication
 
@@ -11,5 +12,7 @@ Separate steps of load and parse data vs transform (categorize into bike race ty
 ReactJS view - sortable, searchable table of races
 
 Configure logging to file
+
+Yammer to document
 
 THEN - Build app in dropwizard and go and compare!!!

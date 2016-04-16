@@ -28,6 +28,8 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("mysql:mysql-connector-java")
 	compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.6.3') // for json localdate formatting
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
