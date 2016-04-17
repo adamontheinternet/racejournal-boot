@@ -6,6 +6,7 @@ import com.racejournal.domain.Race;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,5 +31,11 @@ public class RaceController {
             raceType = RaceType.valueOf(raceTypeString);
         }
         return raceService.fetchRaces(raceType);
+    }
+
+    @RequestMapping("/races/{raceType}")
+    public List<Race> racesByRaceType(@PathVariable(value="raceType") String raceTypeString) {
+        log.info(String.format("Get races for raceType %s", raceTypeString));
+        return raceService.fetchRaces(RaceType.valueOf(raceTypeString.toUpperCase()));
     }
 }

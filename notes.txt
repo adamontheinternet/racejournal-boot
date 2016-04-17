@@ -9,7 +9,7 @@ Basic authentication
 
 Separate steps of load and parse data vs transform (categorize into bike race type)
 
-ReactJS view - sortable, searchable table of races
+ReactJS vs AngularJS 2 view - sortable, searchable table of races
 
 Configure logging to file
 
