@@ -15,4 +15,6 @@ Configure logging to file
 
 Yammer to document
 
+Investigate CSS to get looking pretty
+
 THEN - Build app in dropwizard and go and compare!!!

@@ -129,7 +129,7 @@ public class ColoradoCyclingService {
             return RaceType.ROAD_RACE;
         }  else if(name.contains("Track")) {
             return RaceType.TRACK;
-        } else if(name.contains("Cyclocross") || name.contains("CX") || name.contains("Cross") || name.contains("Cyclo-cross")) {
+        } else if(name.contains("Cyclocross") || name.contains("CX") || name.contains("Cross") || name.contains("Cyclo")) {
             return RaceType.CYCLOCROSS;
         }else {
             return RaceType.OTHER;
