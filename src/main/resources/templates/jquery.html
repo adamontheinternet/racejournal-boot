@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello jQuery!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "races"
+            }).then(function(data) {
+                $('.greeting-id').append(data[0].id);
+                $('.greeting-content').append(data[0].name);
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="content">
+    <p class="greeting-id">The ID is </p>
+    <p class="greeting-content">The name is </p>
+</div>
+</body>
+</html>
